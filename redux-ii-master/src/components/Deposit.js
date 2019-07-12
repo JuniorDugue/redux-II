@@ -8,6 +8,7 @@ class Deposit extends React.Component {
 		this.state = {
 			amount: '',
 			account: 'checking',
+			description: '',
 		}
 	}
 
@@ -21,18 +22,20 @@ class Deposit extends React.Component {
 
 	depositMoney = (evt) => {
 		evt.preventDefault()
-
-		const { amount, account } = this.state
+// calling the action 
+		const { amount, account, description } = this.state
 		this.props.makeDeposit(amount, account)
 
+		// resetting the form after it submits
 		this.setState({
 			amount: '',
+			description: "",
 		})
 	}
 
 	render() {
 		const { total } = this.props
-		const { amount, account } = this.state
+		const { amount, account, description } = this.state
 
 		return (
 			<section>
@@ -52,6 +55,9 @@ class Deposit extends React.Component {
 					
 					<br />
 
+					<input type="text" name="description" placeholder="description" value={description} onChange={this.handleChange} id=""/>
+
+					<br/>
 					<button type="submit">Deposit</button>
 				</form>
 			</section>
